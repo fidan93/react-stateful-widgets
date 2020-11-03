@@ -46,32 +46,33 @@ STEP 6:
   This click handler needs to use 'setCount' to set the 'count' to be zero again.
 */
 
-import React from 'react'; /* STEP 0 */
+// import React from 'react'; /* STEP 0 */
 
+import React, { useState } from "react";
 export default function Counter() {
   /* STEP 1 */
-
+const [count,setCount] = useState(0);
   const increment = () => {
-    /* STEP 4 */
+    /* STEP 4 */setCount(count + 1)
   };
   const decrement = () => {
-    /* STEP 5 */
+    /* STEP 5 */setCount(count-1)
   };
   const reset = () => {
-    /* STEP 6 */
+    /* STEP 6 */setCount(0)
   };
 
   const style = {
     fontSize: '1.5em',
     marginBottom: '0.3em',
-    color: 'royalblue', /* STEP 2 */
+    color: count % 2 == 0 ? 'royalblue': "crimson"/* STEP 2 */
   };
 
   return (
     <div className='widget-counter container'>
       <h2>Counter</h2>
       <div id='count' style={style}>
-        Number 0 is even {/* STEP 3 */}
+        Number {count} is {count % 2 == 0 ? "even" : "odd"}
       </div>
       <div>
         <button id='increment' onClick={increment}>Increment</button>
@@ -81,3 +82,57 @@ export default function Counter() {
     </div>
   );
 }
+// /*
+// /*
+// 💥💥💥 Rules of STATE 💥💥💥
+//   - We create a slice of state like this: `const [healthPoints, setHealthPoints] = useState(100)`
+//   - A component may have as may slices of state as it needs
+//   - An slice of state may contain a string, a number, a boolean, an array, an object...
+//   - We use slices of state to store information that changes as the user interacts with the app
+//   - State is used in the JSX interpolated inside curly brackets
+//   - We never tamper with state: `healthPoints++`, `healthPoints--` or `someState.push(item)` is FORBIDDEN
+//   - We use the dedicated "state updater" to schedule a state change: `setHealthPoints(healthPoints + 1)`
+// */
+
+// import React, { useState } from "react";
+
+// export default function Playground(props) {
+//   // useState allows us to set internal state
+//   // it is a function that takes desired initial state
+//   // it returns an array with two things:
+//   // 1. the state itself and
+//   // 2. a state changer function
+//   const [count, setCount] = useState(0); // destructuring
+//   const [spinnerOn, setSpinnerOn] = useState(false);
+//   const [weapon, setWeapon] = useState("scissors");
+
+//   if (spinnerOn) {
+//     return (
+//       <div className="container">
+//         Please wait...Loading
+//         <button onClick={(event) => setSpinnerOn(false)}>
+//           Turn Spinner Off
+//         </button>
+//       </div>
+//     );
+//   }
+
+//   return (
+//     <div className="container">
+//       <h3>Playground for Web {props.cohort}</h3>
+//       <div>the count is {count}</div>
+
+//       <div>the current weapon is {weapon}</div>
+//       <button onClick={(event) => setWeapon("scissors")}>pick scissors</button>
+//       <button onClick={(event) => setWeapon("rock")}>pick rock</button>
+//       <button onClick={(event) => setWeapon("paper")}>pick paper</button>
+
+//       <button onClick={(event) => setCount(count + 1)}>increase</button>
+//     </div>
+//   );
+// }
+
+// // const theArray = useState(0);
+// // const count = theArray[0];
+// // const setCount = theArray[1];
+
